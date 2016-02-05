@@ -1,0 +1,57 @@
+doctype html
+head
+  title Tic-Tac-Toe!
+  link(rel='stylesheet', href='src/reset.css', type='text/css')
+  link(rel='stylesheet', href='src/style.css', type='text/css')
+  link(href="https://fonts.googleapis.com/css?family=Sigmar+One|PT+Sans+Caption:400,700|Quicksand:700", rel="stylesheet", type="text/css")
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+body
+  #game-board
+    #name-plate
+      h1.yellow Tic-Tac-Toe!
+    #result-ribbon
+    #play-wrapper
+      #play-area
+    #options-wrapper
+      #buttons
+        #start.switch START
+        #restart.switch.greyed RESTART
+      #switch-piece-wrapper.option
+        h3.yellow You are
+        .switcher
+          #piece-frame.frame
+            #piece-image.curr-option
+              | - O -
+              br
+              | - X -
+          .switch-container
+            .switch.piece-switch Switch
+      #switch-player2-wrapper.option
+        h3.yellow Player 2 is
+        .switcher
+          #choice-frame.frame
+            #choice.curr-option 
+              | - HUMAN -
+              br
+              | - COMPUTER -
+          .switch-container
+            .switch.choice-switch Switch
+      #switch-order-wrapper.option
+        h3.yellow You go
+        .switcher
+          #order-frame.frame
+            #order.curr-option 
+              | - SECOND -
+              br
+              | - FIRST -
+          .switch-container
+            .switch.order-switch Switch
+    #made-by.yellow - made by SPEKACHU -
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js')  
+  script(src='src/game.js')  
+  
+  
+  
+  
+  
+  

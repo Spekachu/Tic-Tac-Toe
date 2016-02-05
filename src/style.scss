@@ -1,0 +1,335 @@
+#game-board, #play-wrapper, #play-area, #options-wrapper, #options-wrapper > *, .switcher, .switch-container {
+  display: flex;
+}
+#game-board, #play-wrapper, #options-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+body {
+  background: #612d00 url("http://www.transparenttextures.com/patterns/dark-wood.png");
+}
+$blue-bg: #3366cc;
+//$blue-bg: #2947a3;
+$slot-bg: darken($blue-bg, 5%);
+$border-gb: darken($blue-bg, 50%);
+$red: red;
+$green: #00aa00;
+$text-color: #262626;
+#game-board {
+  box-sizing: border-box;
+  //border:solid 1px $border-gb;
+  position: relative;
+  cursor: default;
+  user-select: none;
+  width: 100%;
+  max-width: 400px;
+  margin: 5% auto;
+  //margin-top: 5%;
+  padding: 10px 10px 30px;
+  border-radius: 20px;
+  min-height: 400px;
+  justify-content: space-between;
+  background: $blue-bg;
+  box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5),
+        inset 0px -5px 15px 10px rgba(0,0,0,0.5);
+}
+#name-plate {
+  text-align: center;
+  //width: 75%;
+  //max-width: 300px;
+  height: 40px;
+  font-family: 'Sigmar One', sans-serif;
+  //font-size: 3em;
+  line-height: 35px;
+  margin: 15px auto 30px;
+  //background: white;
+  //border: solid 2px $text-color;
+  //border-bottom: solid 4px $text-color;
+}
+.yellow {
+  background-color: yellow;
+  color: transparent;
+  text-shadow: 0px 3px 2px rgba(0,0,0,.45);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+}
+
+@mixin yellow-banner() {
+    color: yellow;
+    background: rgba(255, 204, 51,.5);
+    background: rgba(yellow, .5);
+    border-top: solid rgba(yellow,.75);
+    border-bottom: solid rgba(yellow,.75);
+    box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0,.25),
+                inset -10px 0px 15px 2px rgba(77, 58, 0,.25);
+}
+#result-ribbon { // default has win properties
+  position: absolute;
+  box-sizing: border-box;
+  width: (100%);
+  left: 0;
+  top: 125px;
+  z-index: 2;
+  height: 70px;
+  font-size: 2em;
+  text-align: center;
+  font-family: 'Sigmar One','PT Sans Caption', Arial, Sans-Serif;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: -2;
+  transition: opacity 1s ease, z-index .01s ease;
+}
+.displayed {
+  z-index: 2 !important;
+  opacity: 1 !important;
+  transition: z-index 3s ease;
+}
+.win {
+  @include yellow-banner();
+  &:after {
+    content: 'You win!';
+  }
+}
+.tie {
+  color: #33cc33;
+  background: rgba(green,.5);
+  border-top: solid rgba(green,.75);
+  border-bottom: solid rgba(green,.75);
+  box-shadow: inset 10px 0px 15px 2px rgba(0, 58, 77,.25),
+              inset -10px 0px 15px 2px rgba(0, 58, 77,.25);
+  text-shadow: 0px 0px 40px rgba(0,0,0,.75) !important;
+  &:after {
+    content: "It's a tie!";
+  }
+}
+.lose {
+  color: rgba(255, 0, 0,1);
+  background: rgba(150, 100, 100,.5);
+  border-top: solid rgba(255, 0, 0,.75);
+  border-bottom: solid rgba(255, 0, 0,.75);
+  box-shadow: inset 10px 0px 15px 5px rgba(255,0,0,.25),
+              inset -10px 0px 15px 5px rgba(255,0,0,.25);
+  text-shadow: 0px 0px 40px rgba(0,0,0,.75) !important;
+  &:after {
+    content: 'You lose!';
+  }
+  &.toPlayer2 {
+    @include yellow-banner();
+    font-size: 1.75em !important;
+    &:after {
+      content: 'Player 2 wins!';
+    }
+  }
+}
+#play-wrapper {
+  width: 90%;
+  margin-bottom: 10px;
+}
+#play-area {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.pieces {
+  display:none;
+}
+.winning-tile {
+  border: solid 2px yellow !important;
+  box-shadow: inset 0px 0px 20px 2px yellow !important;
+}
+.comp-winning-tile {
+  border: solid 2px red !important;
+  box-shadow: inset 0px 0px 20px 2px rgba(250,0,0,1) !important;
+}
+.slot {
+  cursor: pointer;
+  //overflow: hidden;
+  position: relative;
+  width: ((100%)/3) - 3;
+  height: ((100%)/3) - 3;
+  text-align: center;
+  border-radius: 10px;
+  border: solid 2px $slot-bg;
+  box-shadow: inset 0px -5px 15px 0px rgba(250,250,250,.15),
+              inset 0px 5px 15px 5px rgba(0,0,0,0.25);
+  background: $slot-bg;
+  p {
+    position:relative;
+    font-family: 'Quicksand', 'PT Sans Caption', sans-serif;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    &.shadow {
+      position: absolute;
+      background-color: darken($slot-bg, 12%) !important;
+      //background-color: #565656;
+      color: transparent !important;
+      text-shadow: 0px 2px 3px rgba(255,255,255,0.1);
+      -webkit-background-clip: text;
+         -moz-background-clip: text;
+              background-clip: text;
+    }
+    &.red {
+      z-index: 1;
+      background-color: $red;
+      color: transparent;
+      text-shadow: 0px 2px 3px rgba(0,0,0,.5);
+      -webkit-background-clip: text;
+         -moz-background-clip: text;
+              background-clip: text;
+    }
+    &.green {
+      z-index: 1;
+      background-color: $green;
+      color: transparent;
+      text-shadow: 0px 2px 3px rgba(0,0,0,.5);
+      -webkit-background-clip: text;
+         -moz-background-clip: text;
+              background-clip: text;
+    }
+  }
+}
+#options-wrapper {
+  width: 90%;
+  margin-bottom: 10px;
+}
+#buttons .switch {
+  margin: 5px 10px;
+  &:active {
+    background-color: darken($red, 20%);
+    box-shadow: 0 1px 0 0 rgba(0,0,0,1),
+          inset 0 -5px 10px 0px rgba(250,250,250,.25),
+          inset 0 5px 10px 2px rgba(0,0,0,.25),
+              0 2px 2px 2px rgba(0,0,0,.5);
+    border: none;
+  }
+}
+.option {
+  //border: solid;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  margin:10px auto 5px;
+  text-align:center;
+}
+h3 {
+  font-size: 1.5em;
+  font-family: 'Sigmar One','PT Sans Caption', Arial, Sans-Serif;
+  margin: 5px 5px 10px;
+}
+.switcher {
+  flex-direction: column;
+  //text-align: center;
+}
+.switch, .frame {
+  font-family: 'PT Sans Caption', Arial, Sans-Serif;
+}
+.frame {
+  border: solid 2px darken($slot-bg, 20%);
+  box-shadow: inset 0 0 5px 2px rgba(0,0,0,.5);
+  background: white;
+  height: 1.75em;
+  line-height: 1.75em;
+  width: 115px;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  margin: 15px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+#choice, #piece-image, #order {
+  margin-top: -28px;
+}
+.switch, #choice, #piece-image, #order {
+  transition: margin-top .5s ease;
+}
+.option2 {
+  margin-top: 0 !important;
+}
+#piece-frame {
+  width: 3em;
+}
+#order-frame {
+  width: 6.5em;
+}
+.switch-container {
+  padding: 1px;
+  height: 60px;
+  width: 70px;
+  background: $slot-bg;
+  border-radius: 20px;
+  border: darken($slot-bg, 20%) solid 2px;
+  box-shadow: inset 0 -5px 10px 0px rgba(250,250,250,.15),
+          inset 0 5px 10px 2px rgba(0,0,0,.5);
+  overflow: hidden;
+  margin:auto;
+}
+.switch {
+  cursor: pointer;
+  font-weight: bold;
+  border-top: 1px solid #f79797;
+  background: $red;
+  padding: 8px 17px;
+  border-radius: 20px;
+  box-shadow: 0 1px 0 0 rgba(0,0,0,1),
+          inset 0 5px 10px 0px rgba(250,250,250,.75),
+          inset 0 -5px 10px 2px rgba(0,0,0,.75),
+              0 2px 2px 2px rgba(0,0,0,.5);
+  text-shadow: 0px -1px 2px rgba(0,0,0,.75),
+               1px -1px 0px rgba(0,0,0,.25),
+               -1px -1px 0px rgba(0,0,0,.25),
+               0 1px 2px rgba(200,200,200,.5);
+  color: white;
+  height: 1.2em;
+  font-size: .7em;
+  text-decoration: none;
+  vertical-align: middle;
+  margin-top: 0px;
+}
+.switched {
+  margin-top: 28px;
+}
+.greyed {
+  background: grey;
+  border-top: 1px solid lightgrey;
+  &:active {
+    background-color: grey !important;
+  }
+}
+#made-by {
+  font-weight: bold;
+}
+@media screen and (min-width: 320px) {
+  .switch {
+    font-size: 1.2em; 
+  }
+  .switch-container {
+    height: 70px;
+    width: 97px;
+  }
+  .switcher {
+    flex-direction: row;
+  }
+  #buttons .switch {
+    margin: 5px 20px;
+  }
+  #result-ribbon {
+    top: 280px;
+  }
+  .switched {
+    margin-top: 30px;
+  }
+}
+
+
+
+
+
+
+
+

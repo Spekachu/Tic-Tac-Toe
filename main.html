@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+  <title>Tic-Tac-Toe!</title>
+  <link rel="stylesheet" href="src/reset.css" type="text/css">
+  <link rel="stylesheet" href="src/style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Sigmar+One|PT+Sans+Caption:400,700|Quicksand:700" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div id="game-board">
+    <div id="name-plate">
+      <h1 class="yellow">Tic-Tac-Toe!</h1>
+    </div>
+    <div id="result-ribbon"></div>
+    <div id="play-wrapper">
+      <div id="play-area"></div>
+    </div>
+    <div id="options-wrapper">
+      <div id="buttons">
+        <div id="start" class="switch">START</div>
+        <div id="restart" class="switch greyed">RESTART</div>
+      </div>
+      <div id="switch-piece-wrapper" class="option">
+        <h3 class="yellow">You are</h3>
+        <div class="switcher">
+          <div id="piece-frame" class="frame">
+            <div id="piece-image" class="curr-option">- O -<br>- X -</div>
+          </div>
+          <div class="switch-container">
+            <div class="switch piece-switch">Switch</div>
+          </div>
+        </div>
+      </div>
+      <div id="switch-player2-wrapper" class="option">
+        <h3 class="yellow">Player 2 is</h3>
+        <div class="switcher">
+          <div id="choice-frame" class="frame">
+            <div id="choice" class="curr-option">
+               
+              - HUMAN -<br>- COMPUTER -
+            </div>
+          </div>
+          <div class="switch-container">
+            <div class="switch choice-switch">Switch</div>
+          </div>
+        </div>
+      </div>
+      <div id="switch-order-wrapper" class="option">
+        <h3 class="yellow">You go</h3>
+        <div class="switcher">
+          <div id="order-frame" class="frame">
+            <div id="order" class="curr-option">
+               
+              - SECOND -<br>- FIRST -
+            </div>
+          </div>
+          <div class="switch-container">
+            <div class="switch order-switch">Switch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="made-by" class="yellow">- made by SPEKACHU -</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"> </script>
+  <script src="src/game.js"> </script>
+</body>
