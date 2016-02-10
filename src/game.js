@@ -33,6 +33,7 @@ var playArea = $('#play-area');
 var slot = $('.slot');
 var pieceO = 'green-piece';
 var pieceX = 'red-piece';
+var gamePrintOut = ' | | '+'\n'+' | | '+'\n'+' | | ';
 
 function isAvail(i) {
   return availSlots.indexOf(i) != -1;
@@ -40,6 +41,7 @@ function isAvail(i) {
 function initVars() {
   playArea.html(slots);
   winningSlots = [];
+  printGame();
 }
 function resetVars() { // called by reset button
   initVars();
@@ -76,20 +78,24 @@ function printData() {
   printGame();
 }
 function printGame() {
-  var line = ['','',''];
-  for (var i = 0; i < 7; i+=3) {
-    for (var j = 0; j < 3; j++) {
-      var slot = i + j;
-      if (userPieces.indexOf(slot) !=-1) {
-        line[j] = (userIsX ? 'X' : 'O');
-      } else if (p2Pieces.indexOf(slot) !=-1) {
-        line[j] = (!userIsX ? 'X' : 'O');
-      } else {
-        line[j] = ' ';
-      }
+  gamePrintOut = '';
+  var line = ['','','','','','','','',''];
+  for (var i = 0; i < 9; i+=1) {
+    var slot = i;
+    if (userPieces.indexOf(slot) !=-1) {
+      line[i] = (userIsX ? 'X' : 'O');
+    } else if (p2Pieces.indexOf(slot) !=-1) {
+      line[i] = (!userIsX ? 'X' : 'O');
+    } else {
+      line[i] = ' ';
     }
-    console.log(line[0]+ "|"+line[1]+ "|"+line[2]);
+    if ([1,2,4,5,7,8].indexOf(i) != -1)
+      gamePrintOut += "|";
+    if ([3,6].indexOf(i) != -1)
+      gamePrintOut += "\n";
+    gamePrintOut += line[i];
   }
+  console.log(gamePrintOut);
 }
 function handleSwitch(elem) {
   elem.toggleClass('switched');
