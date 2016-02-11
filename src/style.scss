@@ -1,15 +1,26 @@
 #game-board, #play-wrapper, #play-area, #options-wrapper, #options-wrapper > *, .switcher, .switch-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 #game-board, #play-wrapper, #options-wrapper {
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
 }
 body {
   background: #612d00 url("http://www.transparenttextures.com/patterns/dark-wood.png");
 }
 $blue-bg: #3366cc;
-//$blue-bg: #2947a3;
+/*$blue-bg: #2947a3;*/
 $slot-bg: darken($blue-bg, 5%);
 $border-gb: darken($blue-bg, 50%);
 $red: red;
@@ -17,41 +28,46 @@ $green: #00aa00;
 $text-color: #262626;
 #game-board {
   box-sizing: border-box;
-  //border:solid 1px $border-gb;
+  /*border:solid 1px $border-gb;*/
   position: relative;
   cursor: default;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   width: 100%;
   max-width: 400px;
   margin: 5% auto;
-  //margin-top: 5%;
+  /*margin-top: 5%;*/
   padding: 10px 10px 30px;
   border-radius: 20px;
   min-height: 400px;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   background: $blue-bg;
   box-shadow: 0px 10px 20px 10px rgba(0,0,0,0.5),
         inset 0px -5px 15px 10px rgba(0,0,0,0.5);
 }
 #name-plate {
   text-align: center;
-  //width: 75%;
-  //max-width: 300px;
+  /*width: 75%;*/
+  /*max-width: 300px;*/
   height: 40px;
   font-family: 'Sigmar One', sans-serif;
-  //font-size: 3em;
+  /*font-size: 3em;*/
   line-height: 35px;
   margin: 15px auto 30px;
-  //background: white;
-  //border: solid 2px $text-color;
-  //border-bottom: solid 4px $text-color;
+  /*background: white;*/
+  /*border: solid 2px $text-color;*/
+  /*border-bottom: solid 4px $text-color;*/
 }
 .yellow {
   background-color: yellow;
   color: transparent;
   text-shadow: 0px 3px 2px rgba(0,0,0,.45);
   -webkit-background-clip: text;
-  -moz-background-clip: text;
   background-clip: text;
 }
 
@@ -64,7 +80,7 @@ $text-color: #262626;
     box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0,.25),
                 inset -10px 0px 15px 2px rgba(77, 58, 0,.25);
 }
-#result-ribbon { // default has win properties
+#result-ribbon { /* default has win properties*/
   position: absolute;
   box-sizing: border-box;
   width: (100%);
@@ -75,16 +91,27 @@ $text-color: #262626;
   font-size: 2em;
   text-align: center;
   font-family: 'Sigmar One','PT Sans Caption', Arial, Sans-Serif;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-ms-flexbox;
   display:flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   opacity: 0;
   z-index: -2;
+  -webkit-transition: opacity 1s ease, z-index .01s ease;
   transition: opacity 1s ease, z-index .01s ease;
 }
 .displayed {
   z-index: 2 !important;
   opacity: 1 !important;
+  -webkit-transition: z-index 3s ease;
   transition: z-index 3s ease;
 }
 .win {
@@ -130,9 +157,18 @@ $text-color: #262626;
 }
 #play-area {
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center;
 }
 .pieces {
   display:none;
@@ -147,7 +183,7 @@ $text-color: #262626;
 }
 .slot {
   cursor: pointer;
-  //overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
   width: ((100%)/3) - 3;
   height: ((100%)/3) - 3;
@@ -166,11 +202,10 @@ $text-color: #262626;
     &.shadow {
       position: absolute;
       background-color: darken($slot-bg, 12%) !important;
-      //background-color: #565656;
+      /*background-color: #565656;*/
       color: transparent !important;
       text-shadow: 0px 2px 3px rgba(255,255,255,0.1);
       -webkit-background-clip: text;
-         -moz-background-clip: text;
               background-clip: text;
     }
     &.red {
@@ -179,7 +214,6 @@ $text-color: #262626;
       color: transparent;
       text-shadow: 0px 2px 3px rgba(0,0,0,.5);
       -webkit-background-clip: text;
-         -moz-background-clip: text;
               background-clip: text;
     }
     &.green {
@@ -188,7 +222,6 @@ $text-color: #262626;
       color: transparent;
       text-shadow: 0px 2px 3px rgba(0,0,0,.5);
       -webkit-background-clip: text;
-         -moz-background-clip: text;
               background-clip: text;
     }
   }
@@ -209,10 +242,21 @@ $text-color: #262626;
   }
 }
 .option {
-  //border: solid;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items:center;
+  /*border: solid;*/
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+      -ms-flex-align:center;
+              -ms-grid-row-align:center;
+          align-items:center;
   margin:10px auto 5px;
   text-align:center;
 }
@@ -222,8 +266,12 @@ h3 {
   margin: 5px 5px 10px;
 }
 .switcher {
-  flex-direction: column;
-  //text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /*text-align: center;*/
 }
 .switch, .frame {
   font-family: 'PT Sans Caption', Arial, Sans-Serif;
@@ -246,6 +294,7 @@ h3 {
   margin-top: -28px;
 }
 .switch, #choice, #piece-image, #order {
+  -webkit-transition: margin-top .5s ease;
   transition: margin-top .5s ease;
 }
 .option2 {
@@ -306,14 +355,18 @@ h3 {
 }
 @media screen and (min-width: 320px) {
   .switch {
-    font-size: 1.2em; 
+    font-size: 1.2em;
   }
   .switch-container {
     height: 70px;
     width: 97px;
   }
   .switcher {
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
   #buttons .switch {
     margin: 5px 20px;
@@ -325,11 +378,3 @@ h3 {
     margin-top: 30px;
   }
 }
-
-
-
-
-
-
-
-

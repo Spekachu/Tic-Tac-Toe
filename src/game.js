@@ -168,7 +168,7 @@ function checkPieces(pieces, isUser) {
       var num = set[j];
       if (pieces.indexOf(num) != -1){
         hasSlots++;
-      } else if (isAvail(num)) { 
+      } else if (isAvail(num)) {
         availSlots++;
         winningSlot = blockSlot = num;
         //console.log("isAvail: blockSlot " + positions[blockSlot] +" = " + blockSlot);
@@ -201,7 +201,7 @@ function checkIfOver() {
   //console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
   //console.log('CHECKING P2 PIECES');
   checkPieces(p2Pieces, false);
-  
+
   if (playedPieces.length == 9 && !gameOver) {
     callTie();
   }
@@ -243,7 +243,7 @@ function computerGo() {
   if (!usersTurn && player2IsComp && gameStarted && !gameOver) {
     var moveIndex;
     var lastUserMoveCode = positions[lastUserMove];
-     
+
     console.log("userCanWin curr value: " + userCanWin);
     console.log("p2CanWin curr value: " + p2CanWin);
     var firstMoves = cornerSlots.concat(centerSlot);
@@ -260,18 +260,7 @@ function computerGo() {
           if (lastUserMoveCode == 'C') { // center branch
             //pick a random corner
             moveIndex = cornerSlots[Math.floor((Math.random()*4))];
-          } else if (lastUserMoveCode[2] == 'E') { // edges branch
-            // dont have to take center, so chooses random from corners and center
-            // dont choose corners farthest from users edge, user can trap comp
-//             var options = ['C'];
-//             if (lastUserMoveCode[1] == "T" || lastUserMoveCode[1] == "B") {
-//               //options.push();
-//             } else if (lastUserMoveCode[1] == "L" || lastUserMoveCode[1] == "R") {
-              
-//             }
-//             do {
-//               moveIndex = firstMoves[Math.floor((Math.random()*limit))];
-//             } while (positions[moveIndex].indexOf(firstUserMoveCode[1]) != -1);
+          } else if (lastUserMoveCode[2] == 'E') { 
             moveIndex = 4;
           } else if (lastUserMoveCode[2] == 'C') { // corners branch
             // take the center
@@ -289,7 +278,7 @@ function computerGo() {
                 moveIndex = edgeSlots[Math.floor((Math.random()*4))];
             } while (!isAvail(moveIndex));
           } else { // this will take care of the two adjacent edge slots to that corner
-            // no go slots: oppo edge, oppo corner of firstUserMove, 
+            // no go slots: oppo edge, oppo corner of firstUserMove,
             //console.log("choosing EDGE");
             var temp = firstUserMoveCode;
             var opt1 = ' '+firstUserMoveCode[0]+'E';
@@ -304,7 +293,7 @@ function computerGo() {
               moveIndex = cornerSlots[Math.floor((Math.random()*4))];
             } while (!isAvail(moveIndex));
           }
-          //edge branch 
+          //edge branch
           if (firstUserMoveCode[2] == 'E') {
             //comp can be in any corner or the center right now
             // the only user moves that will not activate a block are the two closest edges, and the two farthest corners
@@ -344,7 +333,7 @@ function computerGo() {
           //   var opt1 = firstCompMoveCode[0] + oppoOf(firstCompMoveCode[1]) + 'C';
           //   var opt2 = oppoOf(firstCompMoveCode[0]) + firstCompMoveCode[1] + 'C';
           //   moveIndex = [positions.indexOf(opt1),positions.indexOf(opt2)][Math.floor((Math.random()*2))];
-            
+
           }
           break;
         case 2:
@@ -370,7 +359,7 @@ function computerGo() {
             moveIndex = positions.indexOf(newIndex);
             // this sets comp up, so user blocks or loses, if blocks, the comp blocks back, then one spot left for user, then tie
           }
-          //edge branch 
+          //edge branch
           if (firstUserMoveCode[2] == 'E') {
             //comp can be in any corner or the center right now
             // the only user moves that will not activate a block are the two closest edges, and the two farthest corners
@@ -383,7 +372,7 @@ function computerGo() {
           // computer chooses random remaining edge
           console.log("case 3 #####");
           do { // bug: if comp can win, it still goes through this code
-            moveIndex = positions.indexOf(newEdge()); 
+            moveIndex = positions.indexOf(newEdge());
           } while (!isAvail(moveIndex));// opposite corner branch closed
           // one slot left for user, results in tie, center branch CLOSED
           break;
@@ -432,7 +421,7 @@ function computerGo() {
             console.log("moveIndex: " + positions[moveIndex]);
             // next move is a sure win
           } else { // BRANCH A
-            // user will have either gone on an edge, in which case, its blocking till a tie | or a corner, in which case comp takes the opposite corner, and then its over 
+            // user will have either gone on an edge, in which case, its blocking till a tie | or a corner, in which case comp takes the opposite corner, and then its over
             console.log("lastUserMoveCode = " + lastUserMoveCode);
             moveIndex = positions.indexOf(switchLetters(lastUserMoveCode, true, true));
             // next move is a sure win
@@ -458,7 +447,7 @@ function computerGo() {
           moveIndex = availSlots[0];
           break;
       }
-    } 
+    }
     if (p2CanWin) { //winning is priority
       //console.log('trying to WIN !!!');
       for (var i = 0; i < winningSlots.length; i++) {
@@ -535,7 +524,7 @@ $(function() { //game logic starts when ready! this is startup code
     printData();
   });
 });
- 
+
 // ^^^^^^^^^^^^^^^^ FUNCTIONS FOR GAME LOGIC ^^^^^^^^^^^^^^^^^^^^^^^^
 
 // ------------------------------------------------------------------
@@ -557,7 +546,7 @@ function updateText() {
   var ratio = (width/420);
   // sizing for different browsers/devices
   // DONE: chrome pc, chrome and safari mac, chrome and safari ipad mini
-  
+
   // chrome on pc, chrome and safari on ipad mini
   positionPiece($(".slot .x"), ratio, 8, -5,0,1);
   positionPiece($(".red"), ratio, 8, -5,0,1);
@@ -566,27 +555,27 @@ function updateText() {
   var isiOS = navigator.platform.match(/(iPhone|iPod|iPad)/i)?true:false;
   var isMac = navigator.platform.match(/(Mac)/i)?true:false;
   //console.log("isMac = " + isMac);
-  
+
   // chrome on mac
   if (isMac) {
     positionPiece($(".slot .x"), ratio, 9, -35,0,0);
     positionPiece($(".red"), ratio, 9, -35,0,0);
   }
   var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-  
+
   // safari on mac
   if (isSafari && !isiOS) {
     positionPiece($(".slot .x"), ratio, 9, -35,0,0);
     positionPiece($(".red"), ratio, 9, -37,0,0);
   }
-  
+
   // chrome on android
   if (isAndroid) {
     positionPiece($(".slot .x"), ratio, 7.25, -4,0,2);
     positionPiece($(".red"), ratio, 8, -12,0,2);
   }
   positionPiece($('#name-plate'), ratio, 3.25, 35, 30);
-  
+
 }
 function updateThisElementsHeight(str, whichHeight, scale) {
   var div = $(str);

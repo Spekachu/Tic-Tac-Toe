@@ -2,7 +2,8 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+}
 
 #game-board, #play-wrapper, #options-wrapper {
   -webkit-box-orient: vertical;
@@ -14,13 +15,17 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   -ms-grid-row-align: center;
-  align-items: center; }
+  align-items: center;
+}
 
 body {
-  background: #612d00 url("http://www.transparenttextures.com/patterns/dark-wood.png"); }
+  background: #612d00 url("http://www.transparenttextures.com/patterns/dark-wood.png");
+}
 
+/*$blue-bg: #2947a3;*/
 #game-board {
   box-sizing: border-box;
+  /*border:solid 1px $border-gb;*/
   position: relative;
   cursor: default;
   -webkit-user-select: none;
@@ -30,6 +35,7 @@ body {
   width: 100%;
   max-width: 400px;
   margin: 5% auto;
+  /*margin-top: 5%;*/
   padding: 10px 10px 30px;
   border-radius: 20px;
   min-height: 400px;
@@ -38,23 +44,33 @@ body {
   -ms-flex-pack: justify;
   justify-content: space-between;
   background: #3366cc;
-  box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5), inset 0px -5px 15px 10px rgba(0, 0, 0, 0.5); }
+  box-shadow: 0px 10px 20px 10px rgba(0, 0, 0, 0.5), inset 0px -5px 15px 10px rgba(0, 0, 0, 0.5);
+}
 
 #name-plate {
   text-align: center;
+  /*width: 75%;*/
+  /*max-width: 300px;*/
   height: 40px;
   font-family: 'Sigmar One', sans-serif;
+  /*font-size: 3em;*/
   line-height: 35px;
-  margin: 15px auto 30px; }
+  margin: 15px auto 30px;
+  /*background: white;*/
+  /*border: solid 2px $text-color;*/
+  /*border-bottom: solid 4px $text-color;*/
+}
 
 .yellow {
   background-color: yellow;
   color: transparent;
   text-shadow: 0px 3px 2px rgba(0, 0, 0, 0.45);
   -webkit-background-clip: text;
-  background-clip: text; }
+  background-clip: text;
+}
 
 #result-ribbon {
+  /* default has win properties*/
   position: absolute;
   box-sizing: border-box;
   width: 100%;
@@ -80,13 +96,15 @@ body {
   opacity: 0;
   z-index: -2;
   -webkit-transition: opacity 1s ease, z-index .01s ease;
-  transition: opacity 1s ease, z-index .01s ease; }
+  transition: opacity 1s ease, z-index .01s ease;
+}
 
 .displayed {
   z-index: 2 !important;
   opacity: 1 !important;
   -webkit-transition: z-index 3s ease;
-  transition: z-index 3s ease; }
+  transition: z-index 3s ease;
+}
 
 .win {
   color: yellow;
@@ -94,9 +112,12 @@ body {
   background: rgba(255, 255, 0, 0.5);
   border-top: solid rgba(255, 255, 0, 0.75);
   border-bottom: solid rgba(255, 255, 0, 0.75);
-  box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0, 0.25), inset -10px 0px 15px 2px rgba(77, 58, 0, 0.25); }
-  .win:after {
-    content: 'You win!'; }
+  box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0, 0.25), inset -10px 0px 15px 2px rgba(77, 58, 0, 0.25);
+}
+
+.win:after {
+  content: 'You win!';
+}
 
 .tie {
   color: #33cc33;
@@ -104,9 +125,12 @@ body {
   border-top: solid rgba(0, 128, 0, 0.75);
   border-bottom: solid rgba(0, 128, 0, 0.75);
   box-shadow: inset 10px 0px 15px 2px rgba(0, 58, 77, 0.25), inset -10px 0px 15px 2px rgba(0, 58, 77, 0.25);
-  text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.75) !important; }
-  .tie:after {
-    content: "It's a tie!"; }
+  text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.75) !important;
+}
+
+.tie:after {
+  content: "It's a tie!";
+}
 
 .lose {
   color: red;
@@ -114,23 +138,31 @@ body {
   border-top: solid rgba(255, 0, 0, 0.75);
   border-bottom: solid rgba(255, 0, 0, 0.75);
   box-shadow: inset 10px 0px 15px 5px rgba(255, 0, 0, 0.25), inset -10px 0px 15px 5px rgba(255, 0, 0, 0.25);
-  text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.75) !important; }
-  .lose:after {
-    content: 'You lose!'; }
-  .lose.toPlayer2 {
-    color: yellow;
-    background: rgba(255, 204, 51, 0.5);
-    background: rgba(255, 255, 0, 0.5);
-    border-top: solid rgba(255, 255, 0, 0.75);
-    border-bottom: solid rgba(255, 255, 0, 0.75);
-    box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0, 0.25), inset -10px 0px 15px 2px rgba(77, 58, 0, 0.25);
-    font-size: 1.75em !important; }
-    .lose.toPlayer2:after {
-      content: 'Player 2 wins!'; }
+  text-shadow: 0px 0px 40px rgba(0, 0, 0, 0.75) !important;
+}
+
+.lose:after {
+  content: 'You lose!';
+}
+
+.lose.toPlayer2 {
+  color: yellow;
+  background: rgba(255, 204, 51, 0.5);
+  background: rgba(255, 255, 0, 0.5);
+  border-top: solid rgba(255, 255, 0, 0.75);
+  border-bottom: solid rgba(255, 255, 0, 0.75);
+  box-shadow: inset 10px 0px 15px 2px rgba(77, 58, 0, 0.25), inset -10px 0px 15px 2px rgba(77, 58, 0, 0.25);
+  font-size: 1.75em !important;
+}
+
+.lose.toPlayer2:after {
+  content: 'Player 2 wins!';
+}
 
 #play-wrapper {
   width: 90%;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 #play-area {
   width: 100%;
@@ -145,21 +177,26 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   -ms-grid-row-align: center;
-  align-items: center; }
+  align-items: center;
+}
 
 .pieces {
-  display: none; }
+  display: none;
+}
 
 .winning-tile {
   border: solid 2px yellow !important;
-  box-shadow: inset 0px 0px 20px 2px yellow !important; }
+  box-shadow: inset 0px 0px 20px 2px yellow !important;
+}
 
 .comp-winning-tile {
   border: solid 2px red !important;
-  box-shadow: inset 0px 0px 20px 2px #fa0000 !important; }
+  box-shadow: inset 0px 0px 20px 2px #fa0000 !important;
+}
 
 .slot {
   cursor: pointer;
+  /*overflow: hidden;*/
   position: relative;
   width: 30.33333%;
   height: 30.33333%;
@@ -167,47 +204,62 @@ body {
   border-radius: 10px;
   border: solid 2px #2e5cb8;
   box-shadow: inset 0px -5px 15px 0px rgba(250, 250, 250, 0.15), inset 0px 5px 15px 5px rgba(0, 0, 0, 0.25);
-  background: #2e5cb8; }
-  .slot p {
-    position: relative;
-    font-family: 'Quicksand', 'PT Sans Caption', sans-serif;
-    width: 100%;
-    height: 100%;
-    font-weight: bold; }
-    .slot p.shadow {
-      position: absolute;
-      background-color: #224387 !important;
-      color: transparent !important;
-      text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.1);
-      -webkit-background-clip: text;
-      background-clip: text; }
-    .slot p.red {
-      z-index: 1;
-      background-color: red;
-      color: transparent;
-      text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
-      -webkit-background-clip: text;
-      background-clip: text; }
-    .slot p.green {
-      z-index: 1;
-      background-color: #00aa00;
-      color: transparent;
-      text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
-      -webkit-background-clip: text;
-      background-clip: text; }
+  background: #2e5cb8;
+}
+
+.slot p {
+  position: relative;
+  font-family: 'Quicksand', 'PT Sans Caption', sans-serif;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+}
+
+.slot p.shadow {
+  position: absolute;
+  background-color: #224387 !important;
+  /*background-color: #565656;*/
+  color: transparent !important;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.1);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.slot p.red {
+  z-index: 1;
+  background-color: red;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.slot p.green {
+  z-index: 1;
+  background-color: #00aa00;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
 
 #options-wrapper {
   width: 90%;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 #buttons .switch {
-  margin: 5px 10px; }
-  #buttons .switch:active {
-    background-color: #990000;
-    box-shadow: 0 1px 0 0 black, inset 0 -5px 10px 0px rgba(250, 250, 250, 0.25), inset 0 5px 10px 2px rgba(0, 0, 0, 0.25), 0 2px 2px 2px rgba(0, 0, 0, 0.5);
-    border: none; }
+  margin: 5px 10px;
+}
+
+#buttons .switch:active {
+  background-color: #990000;
+  box-shadow: 0 1px 0 0 black, inset 0 -5px 10px 0px rgba(250, 250, 250, 0.25), inset 0 5px 10px 2px rgba(0, 0, 0, 0.25), 0 2px 2px 2px rgba(0, 0, 0, 0.5);
+  border: none;
+}
 
 .option {
+  /*border: solid;*/
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -223,22 +275,27 @@ body {
   -ms-grid-row-align: center;
   align-items: center;
   margin: 10px auto 5px;
-  text-align: center; }
+  text-align: center;
+}
 
 h3 {
   font-size: 1.5em;
   font-family: 'Sigmar One','PT Sans Caption', Arial, Sans-Serif;
-  margin: 5px 5px 10px; }
+  margin: 5px 5px 10px;
+}
 
 .switcher {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  /*text-align: center;*/
+}
 
 .switch, .frame {
-  font-family: 'PT Sans Caption', Arial, Sans-Serif; }
+  font-family: 'PT Sans Caption', Arial, Sans-Serif;
+}
 
 .frame {
   border: solid 2px #1a3366;
@@ -252,23 +309,29 @@ h3 {
   overflow: hidden;
   margin: 15px 10px;
   border-radius: 5px;
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 #choice, #piece-image, #order {
-  margin-top: -28px; }
+  margin-top: -28px;
+}
 
 .switch, #choice, #piece-image, #order {
   -webkit-transition: margin-top .5s ease;
-  transition: margin-top .5s ease; }
+  transition: margin-top .5s ease;
+}
 
 .option2 {
-  margin-top: 0 !important; }
+  margin-top: 0 !important;
+}
 
 #piece-frame {
-  width: 3em; }
+  width: 3em;
+}
 
 #order-frame {
-  width: 6.5em; }
+  width: 6.5em;
+}
 
 .switch-container {
   padding: 1px;
@@ -279,7 +342,8 @@ h3 {
   border: #1a3366 solid 2px;
   box-shadow: inset 0 -5px 10px 0px rgba(250, 250, 250, 0.15), inset 0 5px 10px 2px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  margin: auto; }
+  margin: auto;
+}
 
 .switch {
   cursor: pointer;
@@ -295,40 +359,48 @@ h3 {
   font-size: .7em;
   text-decoration: none;
   vertical-align: middle;
-  margin-top: 0px; }
+  margin-top: 0px;
+}
 
 .switched {
-  margin-top: 28px; }
+  margin-top: 28px;
+}
 
 .greyed {
   background: grey;
-  border-top: 1px solid lightgrey; }
-  .greyed:active {
-    background-color: grey !important; }
+  border-top: 1px solid lightgrey;
+}
+
+.greyed:active {
+  background-color: grey !important;
+}
 
 #made-by {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 @media screen and (min-width: 320px) {
   .switch {
-    font-size: 1.2em; }
-
+    font-size: 1.2em;
+  }
   .switch-container {
     height: 70px;
-    width: 97px; }
-
+    width: 97px;
+  }
   .switcher {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
-    flex-direction: row; }
-
+    flex-direction: row;
+  }
   #buttons .switch {
-    margin: 5px 20px; }
-
+    margin: 5px 20px;
+  }
   #result-ribbon {
-    top: 280px; }
-
+    top: 280px;
+  }
   .switched {
-    margin-top: 30px; } }
+    margin-top: 30px;
+  }
+}
